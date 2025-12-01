@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35514.174 d17.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HostelBooking.Api", "HostelBooking.Api\HostelBooking.Api.csproj", "{9562568D-F16F-4234-A921-182B1F6BE909}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HostelBooking.Application", "HostelBooking.Application\HostelBooking.Application.csproj", "{323684F3-0FEB-4C55-9F79-C87604620C75}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HostelBooking.Domain", "HostelBooking.Domain\HostelBooking.Domain.csproj", "{E5961C5B-DBD2-470A-BE73-13DA52D68AE2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HostelBooking.Infrastructure", "HostelBooking.Infrastructure\HostelBooking.Infrastructure.csproj", "{084E2F70-1606-4B9F-8F10-31D28CB69C33}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9562568D-F16F-4234-A921-182B1F6BE909}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9562568D-F16F-4234-A921-182B1F6BE909}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9562568D-F16F-4234-A921-182B1F6BE909}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9562568D-F16F-4234-A921-182B1F6BE909}.Release|Any CPU.Build.0 = Release|Any CPU
+		{323684F3-0FEB-4C55-9F79-C87604620C75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{323684F3-0FEB-4C55-9F79-C87604620C75}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{323684F3-0FEB-4C55-9F79-C87604620C75}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{323684F3-0FEB-4C55-9F79-C87604620C75}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E5961C5B-DBD2-470A-BE73-13DA52D68AE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5961C5B-DBD2-470A-BE73-13DA52D68AE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5961C5B-DBD2-470A-BE73-13DA52D68AE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5961C5B-DBD2-470A-BE73-13DA52D68AE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{084E2F70-1606-4B9F-8F10-31D28CB69C33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{084E2F70-1606-4B9F-8F10-31D28CB69C33}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{084E2F70-1606-4B9F-8F10-31D28CB69C33}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{084E2F70-1606-4B9F-8F10-31D28CB69C33}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
