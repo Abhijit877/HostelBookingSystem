@@ -36,7 +36,16 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     var dbContext = scope.ServiceProvider.GetRequiredService<HostelDbContext>();
-    dbContext.Database.Migrate();
+    try
+    {
+        dbContext.Database.Migrate();
+    }
+    catch (Exception ex)
+    {
+        // Log the exception or handle it
+        Console.WriteLine($"Migration failed: {ex.Message}");
+        // Continue without migration for now
+    }
 }
 
 // Configure the HTTP request pipeline.
@@ -53,5 +62,12 @@ app.UseAuthorization();
 app.MapControllers();
 
 // For Railway deployment, use the PORT environment variable
-var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
-app.Run($"http://0.0.0.0:{port}");
+var port = Environment.GetEnvironmentVariable("PORT");
+if (port != null)
+{
+    app.Run($"http://0.0.0.0:{port}");
+}
+else
+{
+    app.Run();
+}
