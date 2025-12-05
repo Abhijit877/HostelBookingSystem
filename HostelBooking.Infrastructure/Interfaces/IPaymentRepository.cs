@@ -1,6 +1,8 @@
+using HostelBooking.Domain.Entities;
+
 namespace HostelBooking.Infrastructure.Interfaces
 {
-    public interface IPaymentRepository
+    public interface IPaymentRepository : IGenericRepository<Payment>
     {
     }
 }

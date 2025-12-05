@@ -1,6 +1,2 @@
-@HostelBooking.Api_HostAddress = http://localhost:5295
-
-GET {{HostelBooking.Api_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
+=======
+@HostelBooking.Api_HostAddress = https://your-railway-app-url.up.railway.app
