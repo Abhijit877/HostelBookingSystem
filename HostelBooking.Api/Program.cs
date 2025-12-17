@@ -1,5 +1,6 @@
 using HostelBooking.Api.Configurations;
 using HostelBooking.Infrastructure.Data;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Npgsql.EntityFrameworkCore.PostgreSQL;
 
@@ -7,8 +8,18 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
+    });
 builder.Services.AddApplicationServices();
+
+// Add Identity
+builder.Services.AddIdentity<HostelBooking.Domain.Entities.User, HostelBooking.Domain.Entities.AppRole>()
+    .AddEntityFrameworkStores<HostelBooking.Infrastructure.Data.HostelDbContext>()
+    .AddDefaultTokenProviders();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

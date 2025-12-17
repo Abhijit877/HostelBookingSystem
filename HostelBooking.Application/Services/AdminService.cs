@@ -25,11 +25,26 @@ namespace HostelBooking.Application.Services
                 throw new Exception("Invalid email or password");
             }
 
-            // Verify password (using simple verification for demo)
+            // Verify password
             if (!VerifyPassword(password, admin.Password))
             {
                 throw new Exception("Invalid email or password");
             }
+
+            return admin;
+        }
+
+        public async Task<Admin> CreateAdminAsync(Admin admin)
+        {
+            var existingAdmin = await _adminRepository.GetByEmailAsync(admin.Email);
+            if (existingAdmin != null)
+                throw new Exception("Admin with this email already exists");
+
+            // Hash password (simple hash for demo)
+            admin.Password = Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(admin.Password));
+
+            await _adminRepository.AddAsync(admin);
+            await _adminRepository.SaveChangesAsync();
 
             return admin;
         }

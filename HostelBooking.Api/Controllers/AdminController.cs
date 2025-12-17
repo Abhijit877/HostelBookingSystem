@@ -15,6 +15,27 @@ namespace HostelBooking.Api.Controllers
             _adminService = adminService;
         }
 
+        [HttpPost("register")]
+        public async Task<IActionResult> Register([FromBody] RegisterAdminRequest request)
+        {
+            try
+            {
+                var admin = new Admin
+                {
+                    Name = request.Name,
+                    Email = request.Email,
+                    Password = request.Password
+                };
+
+                var createdAdmin = await _adminService.CreateAdminAsync(admin);
+                return Ok(new { message = "Admin registered successfully", adminId = createdAdmin.Id });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] AdminLoginRequest request)
         {
@@ -66,6 +87,13 @@ namespace HostelBooking.Api.Controllers
 
     public class AdminLoginRequest
     {
+        public string Email { get; set; }
+        public string Password { get; set; }
+    }
+
+    public class RegisterAdminRequest
+    {
+        public string Name { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
     }

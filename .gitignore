@@ -361,3 +361,8 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+# Local Test Scripts and Logs
+test_local_apis.ps1
+test_log_*.txt
+app_log_*.txt
+test_output*.txt

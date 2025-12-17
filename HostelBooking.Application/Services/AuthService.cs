@@ -1,72 +1,60 @@
 using HostelBooking.Application.Interfaces;
 using HostelBooking.Domain.Entities;
 using HostelBooking.Domain.Enums;
-using HostelBooking.Infrastructure.Interfaces;
+using Microsoft.AspNetCore.Identity;
 
 namespace HostelBooking.Application.Services
 {
     public class AuthService : IAuthService
     {
-        private readonly IUserRepository _userRepository;
+        private readonly UserManager<User> _userManager;
 
-        public AuthService(IUserRepository userRepository)
+        public AuthService(UserManager<User> userManager)
         {
-            _userRepository = userRepository;
+            _userManager = userManager;
         }
 
         public async Task<User> RegisterAsync(string name, string email, string password)
         {
             // Check if user already exists
-            var existingUser = await _userRepository.GetByEmailAsync(email);
+            var existingUser = await _userManager.FindByEmailAsync(email);
             if (existingUser != null)
             {
                 throw new Exception("User with this email already exists");
             }
 
-            // Hash password (using simple hash for demo - in production use BCrypt or similar)
-            var hashedPassword = HashPassword(password);
-
             var user = new User
             {
                 Name = name,
                 Email = email,
-                PasswordHash = hashedPassword,
+                UserName = email, // Identity requires UserName
                 Role = UserRole.User // Default role
             };
 
-            await _userRepository.AddAsync(user);
-            await _userRepository.SaveChangesAsync();
+            var result = await _userManager.CreateAsync(user, password);
+            if (!result.Succeeded)
+            {
+                throw new Exception(string.Join(", ", result.Errors.Select(e => e.Description)));
+            }
+
             return user;
         }
 
         public async Task<User> LoginAsync(string email, string password)
         {
-            var user = await _userRepository.GetByEmailAsync(email);
+            var user = await _userManager.FindByEmailAsync(email);
             if (user == null)
             {
                 throw new Exception("Invalid email or password");
             }
 
-            // Verify password
-            if (!VerifyPassword(password, user.PasswordHash))
+            var result = await _userManager.CheckPasswordAsync(user, password);
+            if (!result)
             {
                 throw new Exception("Invalid email or password");
             }
 
             return user;
-        }
-
-        private string HashPassword(string password)
-        {
-            // Simple hash for demo - in production use proper hashing like BCrypt
-            return Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(password));
-        }
-
-        private bool VerifyPassword(string password, string hashedPassword)
-        {
-            // Simple verification for demo - in production use proper verification
-            var hashedInput = Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(password));
-            return hashedInput == hashedPassword;
         }
     }
 }
